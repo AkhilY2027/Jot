@@ -1,0 +1,26 @@
+[
+	{
+		"date": "2017-01-01",
+		"jot": "Hello, world!"
+	},
+	{
+		"date": "2017-01-02",
+		"jot": "Hello, world again!"
+	},
+	{
+		"date": "2017-01-03",
+		"jot": "Hello, world once more!"
+	},
+	{
+		"date": "2017-01-04",
+		"jot": "Hello, world yet again!"
+	},
+	{
+		"date": "2017-01-05",
+		"jot": "Hello, world one more time!"
+	},
+	{
+		"date": "2017-01-06",
+		"jot": "Hello, world for the last time!"
+	}
+]

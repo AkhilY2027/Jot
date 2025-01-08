@@ -1,0 +1,18 @@
+Main Screen Layout - 3 Views: Beginning, Middle, and End
+	These will have flex of 1, 3, 1
+		Middle will use flexGrow when space is greater
+		Start and End will use flexShrink when space is smaller
+	Beginning: Will contain Buttons to navigate to different pages
+		Could be a later feature but 2 in mind: Notification Settings and Previous Jots
+		Use columnGap to ensure space between these two buttons
+	Middle: Will contain actual text box to write down the Jot
+		Can also have "tags" at end to specify "vibes", "inspiration", etc. - Later feature
+	End: Button to Save Jot + Notify User later that Jot exists
+Notification Settings Layout - 
+Previous Jots Layout - 
+
+Other Additions:
+-Landscape Mode:
+	-Maybe also have a rotation lock feature?
+	-First, set orientation in "app.json" to "default" - Must change if we want our app to react to orientation changes
+	-Can shift so everything is now horizontal instead of vertical

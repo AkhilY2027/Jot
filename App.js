@@ -8,89 +8,30 @@ import { StyleSheet,
 	TextInput,
 	FlatList} from 'react-native';
 import { useState, useEffect } from 'react';
-// import * as RNFS from 'react-native-fs'; - Does not work with Expo
 import * as FileSystem from 'expo-file-system';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Can also do createStackNavigator - more customizable, but more complex + performance-heavy
+import JotScreen from './screens/JotScreen';
+import PastJotsScreen from './screens/PastJotsScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-	const [jots, setJots] = useState([]);
-
-	const loadJots = async () => {
-		try {
-		  const path = `${FileSystem.documentDirectory}jots.json`;
-		  const file = await FileSystem.readAsStringAsync(path);
-		  setJots(JSON.parse(file));
-		} catch (error) {
-		//   console.error('Error loading jots:', error);
-		  console.log('No jots to load');
-		  setJots([]);
-		}
-	  };
-
-	  useEffect(() => {
-		loadJots();
-	  }, []);
-
-	  const formatDate = (dateString) => {
-		const date = new Date(dateString);
-		const now = new Date();
-		const diffTime = Math.abs(now - date);
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		
-		if (diffDays <= 7) {
-		  return date.toLocaleDateString('en-US', {
-			weekday: 'long',
-		  });
-		} else {
-		  return date.toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric'
-		  });
-		}
-	  };
-
-	  const formatTime = (dateString) => {
-		const date = new Date(dateString);
-		return date.toLocaleTimeString('en-US', {
-		  hour: '2-digit',
-		  minute: '2-digit'
-		});
-	  };
 
   return (
-	<SafeAreaView style={styles.container}>
-	  <StatusBar style="auto" />
-	  <View style={styles.buttonContainer}>
-		<Button
-		title="Delete all Jots"
-		onPress={async () => {
-			try {
-				const path = `${FileSystem.documentDirectory}jots.json`;
-				await FileSystem.deleteAsync(path);
-				setJots([]);
-				loadJots();
-			} catch (error) {
-				// console.error('Error deleting jots:', error);
-				console.log('Jots have already been deleted');
-			}
-		}}
-		/>
-	  </View>
-	  <View style={styles.scollingViewContainer}>
-		<FlatList
-			data={jots}
-			renderItem={({ item }) => (
-				<View style={styles.jotCard}>
-					<Text style={styles.jotText}>{item.jot}</Text>
-					<Text style={styles.jotDateText}>{formatDate(item.date)}</Text>
-					<Text style={styles.jotTimeText}>{formatTime(item.date)}</Text>
-				</View>
-			)}
-			keyExtractor={(item) => item.id}
-		/>
-	  </View>
-	  {/* Create a button to delete all jots */}
-	</SafeAreaView>
+	<NavigationContainer>
+		{/* Rest of app code */}
+		<Stack.Navigator>
+			<Stack.Screen
+				name="JotScreen"
+				component={JotScreen}
+			/>
+			<Stack.Screen
+				name="PastJotsScreen"
+				component={PastJotsScreen}
+			/>
+		</Stack.Navigator>
+	</NavigationContainer>
   );
 }
 

@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 // import * as RNFS from 'react-native-fs'; - Does not work with Expo
 import * as FileSystem from 'expo-file-system';
 
-export default function App() {
+export default function PastJotsScreen() {
 	const [jots, setJots] = useState([]);
 
 	const loadJots = async () => {

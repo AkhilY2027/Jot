@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 // import * as RNFS from 'react-native-fs';
 import * as FileSystem from 'expo-file-system';
 
-export default function App() {
+export default function JotScreen() {
 	const [writeJot, setWriteJot] = useState('');
 
 	const saveJot = async () => {

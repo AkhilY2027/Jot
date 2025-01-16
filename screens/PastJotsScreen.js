@@ -7,11 +7,12 @@ import { StyleSheet,
 	Button, 
 	TextInput,
 	FlatList} from 'react-native';
+import TransitionButton from '../components/TransitionButton';
 import { useState, useEffect } from 'react';
 // import * as RNFS from 'react-native-fs'; - Does not work with Expo
 import * as FileSystem from 'expo-file-system';
 
-export default function PastJotsScreen() {
+export default function PastJotsScreen( { navigation } ) {
 	const [jots, setJots] = useState([]);
 
 	const loadJots = async () => {
@@ -60,6 +61,7 @@ export default function PastJotsScreen() {
   return (
 	<SafeAreaView style={styles.container}>
 	  <StatusBar style="auto" />
+	  {/* Create a button to delete all jots */}
 	  <View style={styles.buttonContainer}>
 		<Button
 		title="Delete all Jots"
@@ -89,7 +91,12 @@ export default function PastJotsScreen() {
 			keyExtractor={(item) => item.id}
 		/>
 	  </View>
-	  {/* Create a button to delete all jots */}
+	  <TransitionButton
+	  	text="Jot!"
+		onPress={() => {
+			navigation.navigate('JotScreen');
+		}}
+	  />
 	</SafeAreaView>
   );
 }
@@ -105,6 +112,7 @@ const styles = StyleSheet.create({
   scollingViewContainer: {
 	paddingHorizontal: 16,
 	flex: 1,
+	width: '100%',
   },
   buttonContainer: {
 	height: 50,

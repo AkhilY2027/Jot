@@ -1,6 +1,10 @@
--Create page that will list out all "jots"
--Screen Navigation + Buttons
+TODO:
 -Push Notifications (Should automtically lead to previous notifications)
+	-https://docs.expo.dev/push-notifications/push-notifications-setup/
 -Settings?
 -Landscape Mode?
 -Make the entire thing pretty
+
+Done:
+-Create page that will list out all "jots"
+-Screen Navigation + Buttons

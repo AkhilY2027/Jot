@@ -6,12 +6,14 @@ import { StyleSheet,
 	KeyboardAvoidingView,
 	Button, 
 	TextInput,
-	FlatList} from 'react-native';
+	FlatList,
+	Pressable} from 'react-native';
+import TransitionButton from '../components/TransitionButton';
 import { useState, useEffect } from 'react';
 // import * as RNFS from 'react-native-fs';
 import * as FileSystem from 'expo-file-system';
 
-export default function JotScreen() {
+export default function JotScreen( { navigation } ) {
 	const [writeJot, setWriteJot] = useState('');
 
 	const saveJot = async () => {
@@ -65,7 +67,7 @@ export default function JotScreen() {
 			onChangeText={setWriteJot}
 		/>
 	  </KeyboardAvoidingView>
-	  <View style={styles.submitButtonContainer}>
+	  <View style={styles.saveButtonContainer}>
 		{/* Here, add a button that says "Submit" */}
 		<Button
 		title="Save Jot"
@@ -74,6 +76,12 @@ export default function JotScreen() {
 		}}
 		/>
 	  </View>
+	  <TransitionButton
+	  	text="Past Jots"
+		onPress={() => {
+			navigation.navigate('PastJotsScreen');
+		}}
+	  />
 	</SafeAreaView>
   );
 }
@@ -84,7 +92,7 @@ const styles = StyleSheet.create({
 	backgroundColor: 'green',
 	alignItems: 'center',
 	justifyContent: 'center',
-	paddingTop: StatusBar.currentHeight,
+	paddingTop: StatusBar.currentHeight / 2,
   },
   textBoxContainer: {
 	flexDirection: 'row',
@@ -111,8 +119,12 @@ const styles = StyleSheet.create({
 	minHeight: 100,
 	color: 'black',
   },
-  submitButtonContainer: {
-	flex: 0.5,
-	borderWidth: 2,
-  }
+  saveButtonContainer: {
+	height: 100,
+	alignItems: 'center',
+	justifyContent: 'center',
+	padding: 10,
+	margin: 10,
+	width: '100%',
+  },
 });

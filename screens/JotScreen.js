@@ -8,7 +8,7 @@ import { StyleSheet,
 	TextInput,
 	FlatList,
 	Pressable} from 'react-native';
-import TransitionButton from '../components/TransitionButton';
+import { MajorButton } from '../components/TransitionButton';
 import { useState, useEffect } from 'react';
 // import * as RNFS from 'react-native-fs';
 import * as FileSystem from 'expo-file-system';
@@ -18,6 +18,10 @@ export default function JotScreen( { navigation } ) {
 
 	const saveJot = async () => {
 		try {
+			if (writeJot === '') {
+				console.log('No jot to save');
+				return;
+			}
 			const today = new Date().toISOString().split('T');
 			const path = `${FileSystem.documentDirectory}jots.json`;
 			// console.log(path);
@@ -56,32 +60,25 @@ export default function JotScreen( { navigation } ) {
 
   return (
 	<SafeAreaView style={styles.container}>
-	  <StatusBar style="auto" />
-	  <KeyboardAvoidingView style={styles.textBoxContainer}>
-		{/* Here, add a huge text box that takes up the screen */}
-		<TextInput
-			style={styles.textBox}
-			multiline={true}
-			placeholder="Jot down your thoughts here"
-			value={writeJot}
-			onChangeText={setWriteJot}
+	  <KeyboardAvoidingView style={{ alignItems: 'center', justifyContent: 'center' }} behavior="padding">
+		<StatusBar style="auto" />
+		<View style={styles.textBoxContainer}>
+			{/* Here, add a huge text box that takes up the screen */}
+			<TextInput
+				style={styles.textBox}
+				multiline={true}
+				placeholder="Jot down your thoughts here"
+				value={writeJot}
+				onChangeText={setWriteJot}
+			/>
+		</View>
+		<MajorButton
+			text="Save Jot"
+			onPress={() => {
+				saveJot();
+			}}
 		/>
 	  </KeyboardAvoidingView>
-	  <View style={styles.saveButtonContainer}>
-		{/* Here, add a button that says "Submit" */}
-		<Button
-		title="Save Jot"
-		onPress={() => {
-			saveJot();
-		}}
-		/>
-	  </View>
-	  <TransitionButton
-	  	text="Past Jots"
-		onPress={() => {
-			navigation.navigate('PastJotsScreen');
-		}}
-	  />
 	</SafeAreaView>
   );
 }
@@ -120,7 +117,7 @@ const styles = StyleSheet.create({
 	color: 'black',
   },
   saveButtonContainer: {
-	height: 100,
+	maxHeight: 100,
 	alignItems: 'center',
 	justifyContent: 'center',
 	padding: 10,

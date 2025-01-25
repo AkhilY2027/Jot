@@ -7,8 +7,9 @@ import { StyleSheet,
 	Button, 
 	TextInput,
 	FlatList} from 'react-native';
-import TransitionButton from '../components/TransitionButton';
-import { useState, useEffect } from 'react';
+import { MajorButton } from '../components/TransitionButton';
+import { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 // import * as RNFS from 'react-native-fs'; - Does not work with Expo
 import * as FileSystem from 'expo-file-system';
 
@@ -27,9 +28,15 @@ export default function PastJotsScreen( { navigation } ) {
 		}
 	  };
 
-	  useEffect(() => {
-		loadJots();
-	  }, []);
+	//   useEffect(() => {
+	// 	loadJots();
+	//   }, []);
+
+	useFocusEffect(
+		useCallback(() => {
+			loadJots();
+		}, [])
+	);
 
 	  const formatDate = (dateString) => {
 		const date = new Date(dateString);
@@ -62,9 +69,8 @@ export default function PastJotsScreen( { navigation } ) {
 	<SafeAreaView style={styles.container}>
 	  <StatusBar style="auto" />
 	  {/* Create a button to delete all jots */}
-	  <View style={styles.buttonContainer}>
-		<Button
-		title="Delete all Jots"
+	  <MajorButton
+		text="Delete all Jots"
 		onPress={async () => {
 			try {
 				const path = `${FileSystem.documentDirectory}jots.json`;
@@ -76,8 +82,13 @@ export default function PastJotsScreen( { navigation } ) {
 				console.log('Jots have already been deleted');
 			}
 		}}
-		/>
-	  </View>
+		additionalStyling={{
+			backgroundColor: 'red',
+			borderColor: 'darkred',
+			fontWeight: 'bold',
+			marginTop: 0,
+		}}
+	/>
 	  <View style={styles.scollingViewContainer}>
 		<FlatList
 			data={jots}
@@ -91,12 +102,12 @@ export default function PastJotsScreen( { navigation } ) {
 			keyExtractor={(item) => item.id}
 		/>
 	  </View>
-	  <TransitionButton
+	  {/* <TransitionButton
 	  	text="Jot!"
 		onPress={() => {
 			navigation.navigate('JotScreen');
 		}}
-	  />
+	  /> */}
 	</SafeAreaView>
   );
 }
@@ -107,7 +118,7 @@ const styles = StyleSheet.create({
 	backgroundColor: 'green',
 	alignItems: 'center',
 	justifyContent: 'center',
-	paddingTop: StatusBar.currentHeight,
+	paddingTop: StatusBar.currentHeight / 2,
   },
   scollingViewContainer: {
 	paddingHorizontal: 16,

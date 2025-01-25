@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text} from 'react-native';
 
-export default function TransitionButton({ text, onPress }) {
+export function MajorButton({ text, onPress, additionalStyling }) {
 	return (
 		<Pressable
 			onPress={onPress}
-			style={styles.transitionButtonContainer}
+			style={[styles.transitionButtonContainer, additionalStyling]}
 		>
 			<Text style={styles.buttonText}>{text}</Text>
 		</Pressable>
@@ -20,7 +20,10 @@ const styles = StyleSheet.create({
 		width: '100%',
 	},
 	transitionButtonContainer: {
-		height: 100,
+		maxHeight: 100,
+		// height: 100,
+		// flex: 0.25,
+		// flexShrink: 0.1,
 		width: '90%',
 		flexDirection: 'row',
 		borderWidth: 5,

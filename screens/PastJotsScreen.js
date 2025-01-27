@@ -8,6 +8,7 @@ import { StyleSheet,
 	TextInput,
 	FlatList} from 'react-native';
 import { MajorButton } from '../components/TransitionButton';
+import Colors from '../components/colors';
 import { useState, useEffect, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 // import * as RNFS from 'react-native-fs'; - Does not work with Expo
@@ -87,9 +88,10 @@ export default function PastJotsScreen( { navigation } ) {
 			borderColor: 'darkred',
 			fontWeight: 'bold',
 			marginTop: 0,
+			width: '90%',
 		}}
 	/>
-	  <View style={styles.scollingViewContainer}>
+	  <View style={styles.scrollingViewContainer}>
 		<FlatList
 			data={jots}
 			renderItem={({ item }) => (
@@ -100,6 +102,7 @@ export default function PastJotsScreen( { navigation } ) {
 				</View>
 			)}
 			keyExtractor={(item) => item.id}
+			style={{ width: '100%' }}
 		/>
 	  </View>
 	  {/* <TransitionButton
@@ -112,40 +115,50 @@ export default function PastJotsScreen( { navigation } ) {
   );
 }
 
+// Updated styles for PastJotsScreen.js
 const styles = StyleSheet.create({
-  container: {
-	flex: 1,
-	backgroundColor: 'green',
-	alignItems: 'center',
-	justifyContent: 'center',
-	paddingTop: StatusBar.currentHeight / 2,
-  },
-  scollingViewContainer: {
-	paddingHorizontal: 16,
-	flex: 1,
-	width: '100%',
-  },
-  buttonContainer: {
-	height: 50,
-  },
-  jotCard: {
-	backgroundColor: 'lightblue',
-	marginVertical: 4,
-	width: '100%',
-	padding: 16,
-	borderRadius: 8,
-	borderWidth: 2,
-  },
-  jotText: {
-	fontSize: 16,
-	color: 'black',
-  },
-  jotDateText: {
-	fontSize: 12,
-	color: 'gray',
-  },
-  jotTimeText: {
-	fontSize: 10,
-	color: 'darkgray',
-  }
-});
+	container: {
+	  flex: 1,
+	  backgroundColor: Colors.background,
+	  alignItems: 'center',
+	  justifyContent: 'flex-start',
+	  paddingTop: StatusBar.currentHeight / 2,
+	//   width: '100%',
+	//   height: '100%',
+	},
+	scrollingViewContainer: {
+	  paddingHorizontal: 16,
+	  flex: 1,
+	  width: '100%',
+	},
+	jotCard: {
+	  backgroundColor: Colors.secondary,
+	  marginVertical: 8,
+	  width: '100%',
+	  padding: 16,
+	  borderRadius: 12,
+	  borderWidth: 1,
+	  borderColor: Colors.primary,
+	  shadowColor: '#000',
+	  shadowOffset: { width: 0, height: 2 },
+	  shadowOpacity: 0.1,
+	  shadowRadius: 4,
+	  elevation: 3,
+	},
+	jotText: {
+	  fontSize: 16,
+	  color: Colors.text,
+	  lineHeight: 24,
+	  marginBottom: 8,
+	},
+	jotDateText: {
+	  fontSize: 14,
+	  color: Colors.textLight,
+	  fontWeight: '500',
+	},
+	jotTimeText: {
+	  fontSize: 12,
+	  color: Colors.textLight,
+	  marginTop: 4,
+	}
+  });

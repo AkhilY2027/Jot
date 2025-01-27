@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text} from 'react-native';
+import Colors from './colors';
 
 export function MajorButton({ text, onPress, additionalStyling }) {
 	return (
@@ -13,27 +14,26 @@ export function MajorButton({ text, onPress, additionalStyling }) {
 
 const styles = StyleSheet.create({
 	buttonText: {
-		fontSize: 30,
-		textAlign: 'center',
-		textAlignVertical: 'center',
-		flex: 1,
-		width: '100%',
+	  fontSize: 18,
+	  fontWeight: '600',
+	  color: Colors.background,
+	  textAlign: 'center',
 	},
 	transitionButtonContainer: {
-		maxHeight: 100,
-		// height: 100,
-		// flex: 0.25,
-		// flexShrink: 0.1,
-		width: '90%',
-		flexDirection: 'row',
-		borderWidth: 5,
-		borderColor: 'darkgray',
-		padding: 10,
-		backgroundColor: 'gray',
-		alignItems: 'center',
-		justifyContent: 'center',
-		margin: 10,
-		marginHorizontal: 10,
+	  height: 50,
+	  width: '100%',
+	  borderRadius: 25,
+	  backgroundColor: Colors.primary,
+	  borderWidth: 0,
+	  padding: 10,
+	  shadowColor: '#000',
+	  shadowOffset: { width: 0, height: 2 },
+	  shadowOpacity: 0.2,
+	  shadowRadius: 4,
+	  elevation: 3,
+	  alignItems: 'center',
+	  justifyContent: 'center',
+	  margin: 10,
 	},
-})
+});
 

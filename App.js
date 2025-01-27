@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Can also do createStackNavigator - more customizable, but more complex + performance-heavy
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Colors from './components/colors';
 import JotScreen from './screens/JotScreen';
 import PastJotsScreen from './screens/PastJotsScreen';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,19 +19,26 @@ export default function App() {
 			screenOptions={{
 				headerShown: false,
 				tabBarStyle: {
-					backgroundColor: 'lightgreen',
+					backgroundColor: Colors.secondary,
 					borderTopWidth: 2,
-					borderTopColor: 'black',
-					paddingBottom: 5,
-					paddingTop: 5,
-					height: 60,
-					shadowColor: 'black',
+					borderTopColor: Colors.primary,
+					// TODO: Scale this height based on screen size
+					height: 70,
+					paddingBottom: 8,
+					paddingTop: 8,
+					shadowColor: '#000',
+					shadowOffset: { width: 0, height: -2 },
+					shadowOpacity: 0.1,
+					shadowRadius: 4,
+					elevation: 5,
 				},
-				tabBarActiveTintColor: 'darkgreen',
-				tabBarInactiveTintColor: 'gray',
+				tabBarActiveTintColor: Colors.primary,
+				tabBarInactiveTintColor: Colors.textLight,
 				tabBarLabelStyle: {
-					fontSize: 12,
-					fontWeight: 'bold'
+				  fontSize: 12,
+				  fontWeight: '600',
+				  marginTop: 4,
+				  marginBottom: 4,
 				}
 			}}
 			backBehavior='initialRoute'

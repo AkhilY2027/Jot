@@ -7,9 +7,11 @@ import { StyleSheet,
 	Button, 
 	TextInput,
 	FlatList,
-	Pressable} from 'react-native';
+	Pressable,
+	Platform} from 'react-native';
 import { MajorButton } from '../components/TransitionButton';
 import { useState, useEffect } from 'react';
+import Colors from '../components/colors';
 // import * as RNFS from 'react-native-fs';
 import * as FileSystem from 'expo-file-system';
 
@@ -77,6 +79,11 @@ export default function JotScreen( { navigation } ) {
 			onPress={() => {
 				saveJot();
 			}}
+			additionalStyling={{
+				backgroundColor: Colors.primary,
+				// marginTop: 10,
+				// width: '100%',
+			}}
 		/>
 	  </KeyboardAvoidingView>
 	</SafeAreaView>
@@ -84,44 +91,34 @@ export default function JotScreen( { navigation } ) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-	flex: 1,
-	backgroundColor: 'green',
-	alignItems: 'center',
-	justifyContent: 'center',
-	paddingTop: StatusBar.currentHeight / 2,
-  },
-  textBoxContainer: {
-	flexDirection: 'row',
-	flex: 3,
-	backgroundColor: 'lightgreen',
-	// padding: 20,
-	// borderRadius: 10,
-	// flex: 3,
-	// borderWidth: 1,
-	// // Shadows
-	// shadowColor: 'black',
-	// shadowOpacity: 0.2,
-	// shadowRadius: 4,
-	// shadowOffset: { width: 0, height: 2 },
-	// elevation: 5,
-  },
-  textBox: {
-	flex: 1,
-	borderWidth: 2,
-	padding: 10,
-	margin: 10,
-	borderRadius: 5,
-	textAlignVertical: 'top',
-	minHeight: 100,
-	color: 'black',
-  },
-  saveButtonContainer: {
-	maxHeight: 100,
-	alignItems: 'center',
-	justifyContent: 'center',
-	padding: 10,
-	margin: 10,
-	width: '100%',
-  },
-});
+	container: {
+	  flex: 1,
+	  backgroundColor: Colors.background,
+	  alignItems: 'center',
+	  justifyContent: 'space-between',
+	  paddingTop: StatusBar.currentHeight / 2,
+	},
+	textBoxContainer: {
+	  flex: 1,
+	  flexDirection: 'row',
+	  width: '90%', 
+	  backgroundColor: Colors.secondary,
+	  borderRadius: 12,
+	  padding: 10,
+	  marginVertical: 10,
+	  shadowColor: '#000',
+	  shadowOffset: { width: 0, height: 2 },
+	  shadowOpacity: 0.1,
+	  shadowRadius: 4,
+	  elevation: 3,
+	},
+	textBox: {
+	  flex: 1,
+	  borderWidth: 0,
+	  padding: 15,
+	  fontSize: 16,
+	  color: Colors.text,
+	  textAlignVertical: 'top',
+	  minHeight: 100,
+	}
+  });

@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from './components/colors';
 import JotScreen from './screens/JotScreen';
 import PastJotsScreen from './screens/PastJotsScreen';
+import SettingsScreen from './screens/SettingsScreen';
 import { Ionicons } from '@expo/vector-icons';
 import * as Notifications from 'expo-notifications';
 import { useRef, useEffect } from 'react';
@@ -60,6 +61,19 @@ export default function App() {
 			}}
 			backBehavior='initialRoute'
 		>
+		<Tab.Screen
+			name="Settings"
+			component={SettingsScreen}
+			options={{
+				tabBarIcon: ({ focused, color, size }) => (
+				<Ionicons 
+					name={focused ? 'settings' : 'settings-outline'} 
+					size={24} 
+					color={color} 
+				/>
+				)
+			}}
+		/>
 		<Tab.Screen
 			name="Jots"
 			component={JotScreen}

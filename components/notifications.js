@@ -70,7 +70,7 @@ export async function scheduleJotReminder(jotContent) {
     };
 
     const identifier = await Notifications.scheduleNotificationAsync(schedulingOptions);
-    console.log('Notification scheduled:', identifier);
+    // console.log('Notification scheduled:', identifier);
     return identifier;
   } catch (error) {
     console.error('Error scheduling notification:', error);

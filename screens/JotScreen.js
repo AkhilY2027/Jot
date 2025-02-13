@@ -73,7 +73,7 @@ export default function JotScreen( { navigation } ) {
 			}
 
 			setWriteJot('');
-			console.log('Jot saved');
+			// console.log('Jot saved');
 		} catch (error) {
 			console.error('Error saving jot:', error);
 		}

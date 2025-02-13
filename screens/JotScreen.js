@@ -10,6 +10,7 @@ import { StyleSheet,
 	Pressable,
 	Platform} from 'react-native';
 import { MajorButton } from '../components/TransitionButton';
+import { scheduleJotReminder, requestNotificationPermissions, getAllScheduledNotifications } from '../components/notifications';
 import { useState, useEffect } from 'react';
 import Colors from '../components/colors';
 // import * as RNFS from 'react-native-fs';
@@ -17,6 +18,12 @@ import * as FileSystem from 'expo-file-system';
 
 export default function JotScreen( { navigation } ) {
 	const [writeJot, setWriteJot] = useState('');
+	const [notificationsPermitted, setNotificationsPermitted] = useState(false);
+
+	// Add useEffect to request permissions
+	useEffect(() => {
+		requestNotificationPermissions().then(setNotificationsPermitted);
+	}, []);
 
 	const saveJot = async () => {
 		try {
@@ -37,6 +44,8 @@ export default function JotScreen( { navigation } ) {
 				jots = [];
 			}
 
+			// console.log(today);
+
 			// Add new Jot to beginning of file
 			const newJot = {
 				// For id, do we use the length of the array or the today variable?
@@ -45,6 +54,7 @@ export default function JotScreen( { navigation } ) {
 				time: today[1].split('.')[0],
 				jot: writeJot,
 			};
+			// console.log(newJot.time);
 			jots.unshift(newJot);
 
 			// Write the file
@@ -52,6 +62,15 @@ export default function JotScreen( { navigation } ) {
 				path,
 				JSON.stringify(jots, null, 2)
 			);
+
+			// Schedule reminder notification if permitted
+			if (notificationsPermitted) {
+				await scheduleJotReminder(writeJot);
+				// await getAllScheduledNotifications();
+			}
+			else {
+				console.log('Notifications not permitted');
+			}
 
 			setWriteJot('');
 			console.log('Jot saved');
@@ -83,6 +102,7 @@ export default function JotScreen( { navigation } ) {
 				backgroundColor: Colors.primary,
 				// marginTop: 10,
 				// width: '100%',
+				marginBottom: 20,
 			}}
 		/>
 	  </KeyboardAvoidingView>

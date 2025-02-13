@@ -1,19 +1,36 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Can also do createStackNavigator - more customizable, but more complex + performance-heavy
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from './components/colors';
 import JotScreen from './screens/JotScreen';
 import PastJotsScreen from './screens/PastJotsScreen';
 import { Ionicons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
+import { useRef, useEffect } from 'react';
 
 // const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+	const responseListener = useRef();
+	const navigationRef = useRef();
+
+	useEffect(() => {
+		responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+		  if (response.notification.request.content.data.screen === 'PastJots') {
+			// Using navigationRef instead of navigation hook
+			navigationRef.current?.navigate('PastJots');
+		  }
+		});
+	
+		return () => {
+		  Notifications.removeNotificationSubscription(responseListener.current);
+		};
+	}, []);
 
   return (
-	<NavigationContainer>
+	<NavigationContainer ref={navigationRef}>
 		<Tab.Navigator
 			initialRouteName='Jots'
 			screenOptions={{
@@ -21,7 +38,7 @@ export default function App() {
 				tabBarStyle: {
 					backgroundColor: Colors.secondary,
 					borderTopWidth: 2,
-					borderTopColor: Colors.primary,
+					borderColor: Colors.primary,
 					// TODO: Scale this height based on screen size
 					height: 70,
 					paddingBottom: 8,

@@ -1,4 +1,6 @@
 TODO:
+-Swipe to Delete
+	-https://sanjanahumanintech.medium.com/swipe-to-delete-functionality-in-reactnative-7805dd43f26f
 -Push Notifications (Should automtically lead to previous notifications)
 	-https://docs.expo.dev/push-notifications/push-notifications-setup/
 -Settings?

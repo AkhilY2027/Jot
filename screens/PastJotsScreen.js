@@ -58,11 +58,17 @@ export default function PastJotsScreen( { navigation } ) {
 		}
 	  };
 
-	  const formatTime = (dateString) => {
-		const date = new Date(dateString);
-		return date.toLocaleTimeString('en-US', {
-		  hour: '2-digit',
-		  minute: '2-digit'
+	  const formatTime = (timeString) => {
+		if (!timeString) return '';
+		
+		// Create date object in local timezone
+		const time = new Date(`1970-01-01T${timeString}Z`);
+		
+		return time.toLocaleTimeString('en-US', {
+		  hour: 'numeric',
+		  minute: '2-digit',
+		  hour12: true,
+		  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
 		});
 	  };
 
@@ -98,7 +104,7 @@ export default function PastJotsScreen( { navigation } ) {
 				<View style={styles.jotCard}>
 					<Text style={styles.jotText}>{item.jot}</Text>
 					<Text style={styles.jotDateText}>{formatDate(item.date)}</Text>
-					<Text style={styles.jotTimeText}>{formatTime(item.date)}</Text>
+					<Text style={styles.jotTimeText}>{formatTime(item.time)}</Text>
 				</View>
 			)}
 			keyExtractor={(item) => item.id}

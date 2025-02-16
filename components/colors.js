@@ -1,5 +1,9 @@
 import { Appearance, useColorScheme } from "react-native";
-import App from "../App";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const STORAGE_KEYS = {
+    DARK_MODE: '@dark_mode'
+};
 
 const lightColors = {
     primary: '#2B4C7E',      // Deep navy blue

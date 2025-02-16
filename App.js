@@ -1,4 +1,5 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Keyboard } from 'react-native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Can also do createStackNavigator - more customizable, but more complex + performance-heavy
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from './components/colors';
@@ -21,6 +22,7 @@ export default function App() {
 		responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
 		  if (response.notification.request.content.data.screen === 'PastJots') {
 			// Using navigationRef instead of navigation hook
+			Keyboard.dismiss();
 			navigationRef.current?.navigate('PastJots');
 		  }
 		});

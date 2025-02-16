@@ -1,12 +1,18 @@
 TODO:
+-Settings
+	-Async does not work changing light/dark Mode
+-Colors: Light/Dark Mode should change automtically
 -Swipe to Delete
 	-https://sanjanahumanintech.medium.com/swipe-to-delete-functionality-in-reactnative-7805dd43f26f
 -Push Notifications (Should automtically lead to previous notifications)
 	-https://docs.expo.dev/push-notifications/push-notifications-setup/
--Settings?
 -Landscape Mode?
 -Make the entire thing pretty
 
 Done:
 -Create page that will list out all "jots"
 -Screen Navigation + Buttons
+
+Current Bugs:
+-Push Notifications aren't scheduled
+-When pressing notif while activating keyboard, keyboard glitches
